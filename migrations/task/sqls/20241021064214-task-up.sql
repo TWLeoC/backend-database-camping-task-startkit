@@ -13,7 +13,7 @@
 --     3. 用戶名稱為`肌肉棒子`，Email 為`muscle@hexschooltest.io`，Role為`USER`
 --     4. 用戶名稱為`好野人`，Email 為`richman@hexschooltest.io`，Role為`USER`
 --     5. 用戶名稱為`Q太郎`，Email 為`starplatinum@hexschooltest.io`，Role為`USER`
---     6. 用戶名稱為 透明人，Email 為 opacity0@hexschooltest.io，Role 為 USER
+--     6. 用戶名稱為 透明人，Email 為 opacity0@hexschooltest.io，Role 為 `USER`
 INSERT INTO "USER" ("name", "email", "role")
 VALUES 
 ('李燕容', 'lee2000@hexschooltest.io', 'USER'),
@@ -90,32 +90,32 @@ VALUES
     -- 1. 所有教練都有 `重訓` 專長
     -- 2. 教練`肌肉棒子` 需要有 `瑜珈` 專長
     -- 3. 教練`Q太郎` 需要有 `有氧運動` 與 `復健訓練` 專長
-INSERT INTO "COACH_LINK_SKILL" ("coach_id", "skill_id")
-VALUES
-(
-  (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')),
-  (SELECT id FROM "SKILL" WHERE name = '重訓')
-),
-(
-  (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io')),
-  (SELECT id FROM "SKILL" WHERE name = '重訓')
-),
-(
-  (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
-  (SELECT id FROM "SKILL" WHERE name = '重訓')
-),
-(
-  (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io')),
-  (SELECT id FROM "SKILL" WHERE name = '瑜伽')
-),
-(
-  (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
-  (SELECT id FROM "SKILL" WHERE name = '有氧運動')
-),
-(
-  (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
-  (SELECT id FROM "SKILL" WHERE name = '復健訓練')
-);
+-- INSERT INTO "COACH_LINK_SKILL" ("coach_id", "skill_id")
+-- VALUES
+-- (
+--   (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')),
+--   (SELECT id FROM "SKILL" WHERE name = '重訓')
+-- ),
+-- (
+--   (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io')),
+--   (SELECT id FROM "SKILL" WHERE name = '重訓')
+-- ),
+-- (
+--   (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
+--   (SELECT id FROM "SKILL" WHERE name = '重訓')
+-- ),
+-- (
+--   (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io')),
+--   (SELECT id FROM "SKILL" WHERE name = '瑜伽')
+-- ),
+-- (
+--   (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
+--   (SELECT id FROM "SKILL" WHERE name = '有氧運動')
+-- ),
+-- (
+--   (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
+--   (SELECT id FROM "SKILL" WHERE name = '復健訓練')
+-- );
 -- 3-3 修改：更新教練的經驗年數，資料需求如下：
     -- 1. 教練`肌肉棒子` 的經驗年數為3年
     -- 2. 教練`Q太郎` 的經驗年數為5年
@@ -126,10 +126,10 @@ UPDATE "COACH"
 SET experience_years = 5
 WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io');
 -- 3-4 刪除：新增一個專長 空中瑜伽 至 SKILL 資料表，之後刪除此專長。
-INSERT INTO "SKILL" ("name")
-VALUES ('空中瑜伽');
-DELETE FROM "SKILL"
-WHERE name = '空中瑜伽';
+-- INSERT INTO "SKILL" ("name")
+-- VALUES ('空中瑜伽');
+-- DELETE FROM "SKILL"
+-- WHERE name = '空中瑜伽';
 --  ████████  █████   █    █   █ 
 --    █ █   ██    █  █     █   █ 
 --    █ █████ ███ ███      █████ 
@@ -145,16 +145,16 @@ WHERE name = '空中瑜伽';
     -- 5. 授課結束時間`end_at`設定為2024-11-25 16:00:00
     -- 6. 最大授課人數`max_participants` 設定為10
     -- 7. 授課連結設定`meeting_url`為 https://test-meeting.test.io
-INSERT INTO "COURSE" ("user_id", "skill_id", "name", "start_at", "end_at", "max_participants", "meeting_url") VALUES
-(
-  (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io'),
-  (SELECT id FROM "SKILL" WHERE name = '重訓'),
-  '重訓基礎課',
-  '2024-11-25 14:00:00',
-  '2024-11-25 16:00:00',
-  10,
-  'https://test-meeting.test.io'
-);
+-- INSERT INTO "COURSE" ("user_id", "skill_id", "name", "start_at", "end_at", "max_participants", "meeting_url") VALUES
+-- (
+--   (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io'),
+--   (SELECT id FROM "SKILL" WHERE name = '重訓'),
+--   '重訓基礎課',
+--   '2024-11-25 14:00:00',
+--   '2024-11-25 16:00:00',
+--   10,
+--   'https://test-meeting.test.io'
+-- );
 -- ████████  █████   █    █████ 
 --   █ █   ██    █  █     █     
 --   █ █████ ███ ███      ████  
@@ -171,19 +171,19 @@ INSERT INTO "COURSE" ("user_id", "skill_id", "name", "start_at", "end_at", "max_
         -- 1. 預約人設為 `好野人`
         -- 2. 預約時間`booking_at` 設為2024-11-24 16:00:00
         -- 3. 狀態`status` 設定為即將授課
-INSERT INTO "COURSE_BOOKING" ("user_id", "course_id", "booking_at", "status") VALUES
-(
-  (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io'),
-  (SELECT id FROM "COURSE" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')),
-  '2024-11-24 16:00:00',
-  '即將授課'
-),
-(
-  (SELECT id FROM "USER" WHERE email = 'richman@hexschooltest.io'),
-  (SELECT id FROM "COURSE" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')),
-   '2024-11-24 16:00:00',
-   '即將授課'
- );
+-- INSERT INTO "COURSE_BOOKING" ("user_id", "course_id", "booking_at", "status") VALUES
+-- (
+--   (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io'),
+--   (SELECT id FROM "COURSE" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')),
+--   '2024-11-24 16:00:00',
+--   '即將授課'
+-- ),
+-- (
+--   (SELECT id FROM "USER" WHERE email = 'richman@hexschooltest.io'),
+--   (SELECT id FROM "COURSE" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')),
+--    '2024-11-24 16:00:00',
+--    '即將授課'
+--  );
 -- 5-2. 修改：`王小明`取消預約 `李燕容` 的課程，請在`COURSE_BOOKING`更新該筆預約資料：
     -- 1. 取消預約時間`cancelled_at` 設為2024-11-24 17:00:00
     -- 2. 狀態`status` 設定為課程已取消
@@ -194,13 +194,13 @@ WHERE user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io')
     -- 1. 預約人設為`王小明`
     -- 2. 預約時間`booking_at` 設為2024-11-24 17:10:25
     -- 3. 狀態`status` 設定為即將授課
-INSERT INTO "COURSE_BOOKING" ("user_id", "course_id", "booking_at", "status") VALUES
-(
-  (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io'),
-  (SELECT id FROM "COURSE" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')),
-  '2024-11-24 17:10:25',
-  '即將授課'
-);
+-- INSERT INTO "COURSE_BOOKING" ("user_id", "course_id", "booking_at", "status") VALUES
+-- (
+--   (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io'),
+--   (SELECT id FROM "COURSE" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')),
+--   '2024-11-24 17:10:25',
+--   '即將授課'
+-- );
 -- 5-4. 查詢：取得王小明所有的預約紀錄，包含取消預約的紀錄
 SELECT *
 FROM "COURSE_BOOKING"
