@@ -126,10 +126,10 @@ UPDATE "COACH"
 SET experience_years = 5
 WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io');
 -- 3-4 刪除：新增一個專長 空中瑜伽 至 SKILL 資料表，之後刪除此專長。
--- INSERT INTO "SKILL" ("name")
--- VALUES ('空中瑜伽');
--- DELETE FROM "SKILL"
--- WHERE name = '空中瑜伽';
+INSERT INTO "SKILL" ("name")
+VALUES ('空中瑜伽');
+DELETE FROM "SKILL"
+WHERE name = '空中瑜伽';
 --  ████████  █████   █    █   █ 
 --    █ █   ██    █  █     █   █ 
 --    █ █████ ███ ███      █████ 
@@ -205,11 +205,9 @@ WHERE user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io')
 SELECT *
 FROM "COURSE_BOOKING"
 WHERE user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io');
-
 -- 5-5. 修改：`王小明` 現在已經加入直播室了，請在`COURSE_BOOKING`更新該筆預約資料（請注意，不要更新到已經取消的紀錄）：
     -- 1. 請在該筆預約記錄他的加入直播室時間 `join_at` 設為2024-11-25 14:01:59
     -- 2. 狀態`status` 設定為上課中
-
 UPDATE "COURSE_BOOKING"
 SET join_at = '2024-11-15 14:01:59', status = '上課中'
 WHERE (user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io')) AND cancelled_at IS NULL;
