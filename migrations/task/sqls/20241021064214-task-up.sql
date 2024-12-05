@@ -209,18 +209,19 @@ WHERE user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io');
     -- 1. 請在該筆預約記錄他的加入直播室時間 `join_at` 設為2024-11-25 14:01:59
     -- 2. 狀態`status` 設定為上課中
 UPDATE "COURSE_BOOKING"
-SET join_at = '2024-11-15 14:01:59', status = '上課中'
+SET join_at = '2024-11-25 14:01:59', status = '上課中'
 WHERE (user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io')) AND cancelled_at IS NULL;
 -- 5-6. 查詢：計算用戶王小明的購買堂數，顯示須包含以下欄位： user_id , total。 (需使用到 SUM 函式與 Group By)
 SELECT user_id, SUM(purchased_credits) AS total
 FROM "CREDIT_PURCHASE"
+WHERE user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io')
 GROUP BY user_id;
 -- 5-7. 查詢：計算用戶王小明的已使用堂數，顯示須包含以下欄位： user_id , total。 (需使用到 Count 函式與 Group By)
 SELECT
   user_id,
   COUNT(*) AS total
 FROM "COURSE_BOOKING"
-WHERE cancelled_at IS NULL
+WHERE (user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io')) AND cancelled_at IS NULL
 GROUP BY user_id;
 -- 5-8. [挑戰題] 查詢：請在一次查詢中，計算用戶王小明的剩餘可用堂數，顯示須包含以下欄位： user_id , remaining_credit
     -- 提示：
@@ -260,7 +261,7 @@ ORDER BY 2 DESC
 LIMIT 1;
 -- 6-3. 查詢：計算 11 月份組合包方案的銷售數量
 -- 顯示須包含以下欄位： 組合包方案名稱, 銷售數量
-SELECT "CREDIT_PACKAGE".name AS 組合包方案, COUNT(*) AS 銷售數量
+SELECT "CREDIT_PACKAGE".name AS 組合包方案名稱, COUNT(*) AS 銷售數量
 FROM "CREDIT_PURCHASE"
 INNER JOIN "CREDIT_PACKAGE" ON "CREDIT_PURCHASE".credit_package_id = "CREDIT_PACKAGE".id
 WHERE purchase_at BETWEEN '2024-11-01 00:00:00' AND '2024-11-30 23:59:59' 
